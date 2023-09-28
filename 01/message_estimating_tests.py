@@ -54,3 +54,17 @@ class TestEstimating(unittest.TestCase):
             mock.return_value = "Я вернул строку и что ты мне сделаешь"
             with self.assertRaises(TypeError):
                 predict_message_mood("some string", model)
+
+    def test_too_big_predict(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 2
+            with self.assertRaises(ValueError):
+                predict_message_mood("some string", model)
+
+    def test_too_small_predict(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = -1
+            with self.assertRaises(ValueError):
+                predict_message_mood("some string", model)
