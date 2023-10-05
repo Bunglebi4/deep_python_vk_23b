@@ -13,19 +13,12 @@ def mean(k):
             inner.call_times.append(execution_time)
             if len(inner.call_times) > k:
                 inner.call_times.pop(0)
-
-            average_time = sum(inner.call_times) / len(inner.call_times)
+            average_time = 0.0
+            if inner.call_times:
+                average_time = sum(inner.call_times) / len(inner.call_times)
 
             print(f"Среднее время выполнения последних {len(inner.call_times)} вызовов: {average_time:.6f} секунд")
             return result
 
         return inner
     return decorator
-
-# @mean(k=10)
-# def some_func():
-#     time.sleep(1)
-#
-#
-# for _ in range(10):
-#     some_func()
