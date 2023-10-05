@@ -49,5 +49,3 @@ class TestMeanDecorator(unittest.TestCase):
         self.assertAlmostEqual(average_time, 0.3, delta=0.05)
 
 
-if __name__ == '__main__':
-    unittest.main()
