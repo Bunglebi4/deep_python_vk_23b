@@ -28,7 +28,7 @@ class TestEstimating(unittest.TestCase):
 
     def test_find_string_with_no_intersections(self):
         with open(
-                '01/test_files_for_file_reader/good_file.txt',
+                'test_files_for_file_reader/good_file.txt',
                 encoding='UTF-8'
         ) as file_obj:
             model = LineFinder(file_obj, ["garbage"])
@@ -38,7 +38,7 @@ class TestEstimating(unittest.TestCase):
 
     def test_initialization_with_file_object(self):
         with open(
-                '01/test_files_for_file_reader/good_file.txt',
+                'test_files_for_file_reader/good_file.txt',
                 encoding='UTF-8'
         ) as file_obj:
             model = LineFinder(file_obj, ["Momma", "Imma", "Criminal"])
@@ -47,7 +47,7 @@ class TestEstimating(unittest.TestCase):
 
     def test_initialization_with_file_string(self):
         model = LineFinder(
-            '01/test_files_for_file_reader/good_file.txt',
+            'test_files_for_file_reader/good_file.txt',
             ["Momma", "Imma", "Criminal"]
         )
         self.assertIsInstance(model.file_list, list)
@@ -77,6 +77,38 @@ class TestEstimating(unittest.TestCase):
         finder = LineFinder("test_file.txt", ["роза"])
         good_strings = list(finder.find_good_strings())
         self.assertEqual(good_strings, [])
+
+    def test_find_good_strings_with_two_match(self):
+        file_content = "Шарик бежит\nКот спит"
+        with open("test_file.txt", "w", encoding="utf-8") as file_obj:
+            file_obj.write(file_content)
+        finder = LineFinder("test_file.txt", ["Шарик", "спит"])
+        good_strings = list(finder.find_good_strings())
+        self.assertEqual(good_strings, ["Шарик бежит", "Кот спит"])
+
+    def test_find_good_strings_with_two_filters(self):
+        file_content = "Шарик бежит\nКот спит"
+        with open("test_file.txt", "w", encoding="utf-8") as file_obj:
+            file_obj.write(file_content)
+        finder = LineFinder("test_file.txt", ["Кот", "спит"])
+        good_strings = list(finder.find_good_strings())
+        self.assertEqual(good_strings, ["Кот спит"])
+
+    def test_find_good_strings_with_two_cases(self):
+        file_content = "Шарик бежит\nКОТ СПИТ"
+        with open("test_file.txt", "w", encoding="utf-8") as file_obj:
+            file_obj.write(file_content)
+        finder = LineFinder("test_file.txt", ["КОТ", "спит"])
+        good_strings = list(finder.find_good_strings())
+        self.assertEqual(good_strings, ["КОТ СПИТ"])
+
+    def test_find_good_strings_with_full_intersection(self):
+        file_content = "Шарик"
+        with open("test_file.txt", "w", encoding="utf-8") as file_obj:
+            file_obj.write(file_content)
+        finder = LineFinder("test_file.txt", ["Шарик"])
+        good_strings = list(finder.find_good_strings())
+        self.assertEqual(good_strings, ["Шарик"])
 
     def tearDown(self):
         try:

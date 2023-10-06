@@ -16,7 +16,6 @@ def mean(k):
             average_time = 0.0
             if inner.call_times:
                 average_time = sum(inner.call_times) / len(inner.call_times)
-
             print(
                 f"Среднее время выполнения последних"
                 f" {len(inner.call_times)} вызовов: "

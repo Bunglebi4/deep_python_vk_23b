@@ -68,3 +68,31 @@ class TestEstimating(unittest.TestCase):
             mock.return_value = -1
             with self.assertRaises(ValueError):
                 predict_message_mood("some string", model)
+
+    def test_thresholds_changing(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.8
+            self.assertEqual(
+                predict_message_mood(
+                    "some string", model, 0.1, 0.5),
+                "отл"
+            )
+
+    def test_bad_thresholds(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.8
+            with self.assertRaises(ValueError):
+                predict_message_mood(
+                    "some string", model, -2, 23.0)
+
+    def test_corner_thresholds(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.8
+            self.assertEqual(
+                predict_message_mood(
+                    "some string", model, 0.0, 1.0),
+                "норм"
+            )
