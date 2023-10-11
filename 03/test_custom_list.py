@@ -11,14 +11,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 6, 3, 6, 6])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_with_different_len(self):
+    def test_addition_longer_first_cust_list(self):
         obj_1 = CustomList([0, 3, 2, 3, 3])
         obj_2 = CustomList([0, 3, 1, 3, 3, 0, 1, 2])
         result = obj_1 + obj_2
         expected = CustomList([0, 6, 3, 6, 6, 0, 1, 2])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_with_diff_len_v_2(self):
+    def test_addition_longer_second_cust_list(self):
         obj_1 = CustomList([0, 3, 2, 3, 3, 1, 2])
         obj_2 = CustomList([0, 3, 1, 3, 3])
         result = obj_1 + obj_2
@@ -32,14 +32,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 6, 3, 6, 6])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_with_list_with_diff_len(self):
+    def test_addition_longer_first_list(self):
         obj_1 = CustomList([0, 3, 2, 3, 3, 1, 2, 3])
         obj_2 = [0, 3, 1, 3, 3]
         result = obj_1 + obj_2
         expected = CustomList([0, 6, 3, 6, 6, 1, 2, 3])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_with_list_with_diff_len_v2(self):
+    def test_addition_longer_second_list(self):
         obj_1 = CustomList([0, 3, 2, 3, 3])
         obj_2 = [0, 3, 1, 3, 3, 1, 2, 3]
         result = obj_1 + obj_2
@@ -53,14 +53,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 6, 3, 6, 6])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_list_with_custom_with_diff_len(self):
+    def test_addition_list_with_custom_with_longer_frst(self):
         obj1 = CustomList([0, 3, 2, 3, 3, 1, 2, 3])
         obj2 = [0, 3, 1, 3, 3]
         result = obj2 + obj1
         expected = CustomList([0, 6, 3, 6, 6, 1, 2, 3])
         self.assertEqual(list(result), list(expected))
 
-    def test_addition_list_with_custom_with_diff_len2(self):
+    def test_addition_list_with_custom_with_diff_scnd(self):
         obj1 = CustomList([0, 3, 2, 3, 3])
         obj2 = [0, 3, 1, 3, 3, 1, 2, 3]
         result = obj2 + obj1
@@ -75,14 +75,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 0, 1, 0, 0])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_with_different_len(self):
+    def test_subtraction_with_second_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3])
         obj2 = CustomList([0, 3, 1, 3, 3, 0, 1, 2])
         result = obj1 - obj2
         expected = CustomList([0, 0, 1, 0, 0, 0, -1, -2])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_with_diff_len_v_2(self):
+    def test_subtraction_with_first_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3, 1, 2])
         obj2 = CustomList([0, 3, 1, 3, 3])
         result = obj1 - obj2
@@ -96,14 +96,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 0, 1, 0, 0])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_with_list_with_diff_len(self):
+    def test_subtraction_with_list_with_first_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3, 1, 2, 3])
         obj2 = [0, 3, 1, 3, 3]
         result = obj1 - obj2
         expected = CustomList([0, 0, 1, 0, 0, 1, 2, 3])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_with_list_with_diff_len_v2(self):
+    def test_subtraction_with_list_with_second_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3])
         obj2 = [0, 3, 1, 3, 3, 1, 2, 3]
         result = obj1 - obj2
@@ -117,14 +117,14 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, 0, -1, 0, 0])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_from_list_with_diff_len(self):
+    def test_subtraction_from_list_with_first_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3, 1, 2, 3])
         obj2 = [0, 3, 1, 3, 3]
         result = obj2 - obj1
         expected = CustomList([0, 0, -1, 0, 0, -1, -2, -3])
         self.assertEqual(list(result), list(expected))
 
-    def test_subtraction_with_from_with_diff_len_v2(self):
+    def test_subtraction_with_from_with_second_longer(self):
         obj1 = CustomList([0, 3, 2, 3, 3])
         obj2 = [0, 3, 1, 3, 3, 1, 2, 3]
         result = obj2 - obj1
