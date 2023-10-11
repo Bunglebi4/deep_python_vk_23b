@@ -1,10 +1,8 @@
 class CustomList(list):
     def __add__(self, other):
         result = CustomList()
-        print(type(result))
         if not isinstance(other, CustomList):
             other = CustomList(other)
-            print(other)
         max_len = max(len(self), len(other))
         for i in range(max(len(self), len(other))):
             result_elem = self[i] + other[i] if i <= min(len(self), len(other)) - 1 else (
@@ -14,14 +12,23 @@ class CustomList(list):
 
     def __sub__(self, other):
         result = CustomList()
-        print(type(result))
         if not isinstance(other, CustomList):
             other = CustomList(other)
-            print(other)
         max_len = max(len(self), len(other))
         for i in range(max(len(self), len(other))):
             result_elem = self[i] - other[i] if i <= min(len(self), len(other)) - 1 else (
-                other[i] if max_len == len(other) else self[i])
+                -other[i] if max_len == len(other) else self[i])
+            result.append(result_elem)
+        return result
+
+    def __rsub__(self, other):
+        if not isinstance(other, CustomList):
+            other = CustomList(other)
+        max_len = max(len(other), len(self))
+        result = CustomList()
+        for i in range(max(len(other), len(self))):
+            result_elem = other[i] - self[i] if i <= min(len(other), len(self)) - 1 else (
+                -self[i] if max_len == len(self) else other[i])
             result.append(result_elem)
         return result
 
@@ -45,9 +52,3 @@ class CustomList(list):
 
     def __str__(self):
         return f'CustomList = {list(self)}, sum = {sum(self)}'
-
-a = CustomList([0, 3, 2, 3, 3])
-b = CustomList([0, 3, 1, 3, 3])
-print(b + a)
-print(b <= a)
-print(a)
