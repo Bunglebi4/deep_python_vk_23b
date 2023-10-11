@@ -65,6 +65,7 @@ class TestCustomList(unittest.TestCase):
         obj2 = [0, 3, 1, 3, 3, 1, 2, 3]
         result = obj2 + obj1
         expected = CustomList([0, 6, 3, 6, 6, 1, 2, 3])
+        print(type(result))
         self.assertEqual(result, expected)
 
     def test_subtraction(self):
@@ -247,3 +248,68 @@ class TestCustomList(unittest.TestCase):
         obj1 - obj2
         self.assertEqual(obj1, expected_obj1)
         self.assertEqual(obj2, expected_obj2)
+
+    def test_add_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            obj1 + obj2
+
+    def test_sub_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            obj1 - obj2
+
+    def test_rsub_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            obj2 - obj1
+
+    def test_eq_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 == obj2
+
+    def test_ne_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 != obj2
+
+    def test_le_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 <= obj2
+
+    def test_lt_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 < obj2
+
+    def test_ge_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 >= obj2
+
+    def test_gt_type_error(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj1 > obj2
+
+    def test_radd(self):
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = "sodjkfgnsodjfgn"
+        with self.assertRaises(TypeError):
+            var = obj2 + obj1
+        obj1 = CustomList([0, 1, 2, 3])
+        obj2 = [0, -2, 3]
+        expected = CustomList([0, -1, 5, 3])
+        self.assertIsInstance(obj2 + obj1, CustomList)
+        self.assertEqual(obj2 + obj1, expected)
