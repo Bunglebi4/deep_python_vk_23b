@@ -313,3 +313,11 @@ class TestCustomList(unittest.TestCase):
         expected = CustomList([0, -1, 5, 3])
         self.assertIsInstance(obj2 + obj1, CustomList)
         self.assertEqual(obj2 + obj1, expected)
+
+    def test_add_with_negative(self):
+        obj1 = CustomList([-1, -2, -3, -5])
+        obj2 = [-1, -1, -1]
+        expected = CustomList([-2, -3, -4, -5])
+        self.assertIsInstance(obj2 + obj1, CustomList)
+        self.assertEqual(obj2 + obj1, expected)
+        self.assertEqual(obj1 + obj2, expected)
