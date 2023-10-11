@@ -30,16 +30,19 @@ class CustomList(list):
                         f" unsupported for {type(other)}")
 
     def __sub__(self, other):
-        result = CustomList()
-        if not isinstance(other, CustomList):
-            other = CustomList(other)
-        max_len = max(len(self), len(other))
-        for i in range(max(len(self), len(other))):
-            result_elem = self[i] - other[i] if \
-                i <= min(len(self), len(other)) - 1 else (
-                -other[i] if max_len == len(other) else self[i])
-            result.append(result_elem)
-        return result
+        if isinstance(other, CustomList) or isinstance(other, list):
+            result = CustomList()
+            if not isinstance(other, CustomList):
+                other = CustomList(other)
+            max_len = max(len(self), len(other))
+            for i in range(max(len(self), len(other))):
+                result_elem = self[i] - other[i] if \
+                    i <= min(len(self), len(other)) - 1 else (
+                    -other[i] if max_len == len(other) else self[i])
+                result.append(result_elem)
+            return result
+        raise TypeError(f"operation '-'"
+                        f" unsupported for {type(other)}")
 
     def __rsub__(self, other):
         if isinstance(other, CustomList) or isinstance(other, list):
