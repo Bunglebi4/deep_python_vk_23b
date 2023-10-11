@@ -236,3 +236,14 @@ class TestCustomList(unittest.TestCase):
         obj2 = CustomList([0, 3, 3, 3, 3])
         obj1 = CustomList([0, 3, 3, 3, 3])
         self.assertFalse(obj1 > obj2)
+
+    def test_original_lists(self):
+        obj1 = CustomList([0, 3, 3, 3, 3])
+        obj2 = CustomList([0, 3, 2, 3, 3])
+        expected_obj1 = CustomList([0, 3, 3, 3, 3])
+        expected_obj2 = CustomList([0, 3, 2, 3, 3])
+        obj2 + obj1
+        obj2 - obj1
+        obj1 - obj2
+        self.assertEqual(obj1, expected_obj1)
+        self.assertEqual(obj2, expected_obj2)

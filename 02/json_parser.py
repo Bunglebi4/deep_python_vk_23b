@@ -6,5 +6,5 @@ def parse_json(json_s, keyword_callback, required_fields=None, keywords=None):
     for key in required_fields:
         if json_doc.get(key):
             for word in keywords:
-                if word in json_doc.get(key):
+                if word == json_doc.get(key):
                     keyword_callback(word)
