@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 from message_estimating import SomeModel, predict_message_mood
 
@@ -37,6 +37,24 @@ class TestEstimating(unittest.TestCase):
             self.assertEqual(
                 predict_message_mood("some string", model),
                 "норм"
+            )
+
+    def test_right_corner(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 1
+            self.assertEqual(
+                predict_message_mood("some string", model),
+                "отл"
+            )
+
+    def test_left_corner(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0
+            self.assertEqual(
+                predict_message_mood("some string", model),
+                "неуд"
             )
 
     def test_corner_between_excellent_and_ok(self):
@@ -87,12 +105,9 @@ class TestEstimating(unittest.TestCase):
                 predict_message_mood(
                     "some string", model, -2, 23.0)
 
-    def test_corner_thresholds(self):
+    def test_predict_arguments(self):
         model = SomeModel()
-        with patch("message_estimating.SomeModel.predict") as mock:
-            mock.return_value = 0.8
-            self.assertEqual(
-                predict_message_mood(
-                    "some string", model, 0.0, 1.0),
-                "норм"
-            )
+        model.predict = MagicMock()
+        message = "message"
+        model.predict(message)
+        model.predict.assert_called_with(message)

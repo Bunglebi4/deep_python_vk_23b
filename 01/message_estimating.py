@@ -1,10 +1,10 @@
-from random import randint
+import random
 
 
 class SomeModel:
 
     def predict(self, message: str) -> float:
-        return randint(0, 1)
+        return random.random()
 
 
 def predict_message_mood(
@@ -13,7 +13,7 @@ def predict_message_mood(
         bad_thresholds: float = 0.3,
         good_thresholds: float = 0.8,
 ) -> str:
-    if bad_thresholds < 0 or good_thresholds>1:
+    if bad_thresholds < 0 or good_thresholds > 1:
         raise ValueError("Unexpected thresholds")
     prediction = model.predict(message)
     if prediction < 0 or prediction > 1:
