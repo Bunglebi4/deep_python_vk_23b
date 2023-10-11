@@ -341,4 +341,4 @@ class TestCustomList(unittest.TestCase):
 
     def test_empty_list_str(self):
         obj = CustomList([])
-        self.assertEqual(obj.__str__(), 'CustomList = [], sum = 0')
+        self.assertEqual(str(obj), 'CustomList = [], sum = 0')

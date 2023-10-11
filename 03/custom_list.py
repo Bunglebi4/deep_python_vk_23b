@@ -1,7 +1,7 @@
 class CustomList(list):
 
     def __add__(self, other):
-        if not (isinstance(other, CustomList) or isinstance(other, list)):
+        if not isinstance(other, (CustomList, list)):
             raise TypeError(f"operation '+'"
                             f" unsupported for {type(other)}")
         result = CustomList()
@@ -16,7 +16,7 @@ class CustomList(list):
         return CustomList(result)
 
     def __radd__(self, other):
-        if not (isinstance(other, CustomList) or isinstance(other, list)):
+        if not isinstance(other, (CustomList, list)):
             raise TypeError(f"operation '+'"
                             f" unsupported for {type(other)}")
         result = CustomList()
@@ -31,7 +31,7 @@ class CustomList(list):
         return CustomList(result)
 
     def __sub__(self, other):
-        if not (isinstance(other, CustomList) or isinstance(other, list)):
+        if not isinstance(other, (CustomList, list)):
             raise TypeError(f"operation '-'"
                             f" unsupported for {type(other)}")
         result = CustomList()
@@ -46,7 +46,7 @@ class CustomList(list):
         return result
 
     def __rsub__(self, other):
-        if not (isinstance(other, CustomList) or isinstance(other, list)):
+        if not isinstance(other, (CustomList, list)):
             raise TypeError(f"operation '-'"
                             f" unsupported for {type(other)}")
         if not isinstance(other, CustomList):
@@ -59,15 +59,6 @@ class CustomList(list):
                 -self[i] if max_len == len(self) else other[i])
             result.append(result_elem)
         return result
-
-    @staticmethod
-    def check_equality(lst1, lst2):
-        if len(lst1) != len(lst2):
-            return False
-        for i in range(len(lst1)):
-            if lst1[i] != lst2[i]:
-                return False
-        return True
 
     def __eq__(self, other):
         return sum(self) == sum(other)
@@ -83,7 +74,6 @@ class CustomList(list):
             raise TypeError(f"operation '<='"
                             f" unsupported for {type(other)}")
         return sum(self) <= sum(other)
-
 
     def __lt__(self, other):
         if not isinstance(other, CustomList):
