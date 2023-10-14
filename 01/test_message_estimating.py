@@ -111,3 +111,11 @@ class TestEstimating(unittest.TestCase):
         message = "message"
         model.predict(message)
         model.predict.assert_called_with(message)
+
+    @patch('message_estimating.SomeModel.predict', mock=MagicMock())
+    def test_predict_arguments_in_message_mood(self, mock):
+        model = SomeModel()
+        mock.return_value = 0.5
+        message = "message"
+        self.assertEqual(predict_message_mood(message, model), "норм")
+        mock.assert_called_with(message)
