@@ -119,3 +119,41 @@ class TestEstimating(unittest.TestCase):
         message = "message"
         self.assertEqual(predict_message_mood(message, model), "норм")
         mock.assert_called_with(message)
+
+    def test_near_right_corner(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0 + 0.01 ** 100
+            self.assertEqual(
+                predict_message_mood("some string", model),
+                "неуд"
+            )
+
+    def test_near_left_corner(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.1 ** 10
+            self.assertEqual(
+                predict_message_mood("some string", model),
+                "неуд"
+            )
+
+    def test_near_corner_threshold_between_good_and_exc(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.8 - 0.1 ** 10
+            self.assertEqual(predict_message_mood("some string", model),
+                             "норм")
+            mock.return_value = 0.8 + 0.1 ** 10
+            self.assertEqual(predict_message_mood("some string", model),
+                             "отл")
+
+    def test_near_corner_threshold_between_good_and_bad(self):
+        model = SomeModel()
+        with patch("message_estimating.SomeModel.predict") as mock:
+            mock.return_value = 0.3 - 0.1**10
+            self.assertEqual(predict_message_mood("some string", model),
+                             "неуд")
+            mock.return_value = 0.3 + 0.1 ** 10
+            self.assertEqual(predict_message_mood("some string", model),
+                             "норм")
