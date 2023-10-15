@@ -9,9 +9,13 @@ class CustomList(list):
             other = CustomList(other)
         max_len = max(len(self), len(other))
         for i in range(max(len(self), len(other))):
-            result_elem = self[i] + other[i] if \
-                i <= min(len(self), len(other)) - 1 else (
-                other[i] if max_len == len(other) else self[i])
+            if i <= min(len(self), len(other)) - 1:
+                result_elem = self[i] + other[i]
+            else:
+                if max_len == len(other):
+                    result_elem = other[i]
+                else:
+                    result_elem = self[i]
             result.append(result_elem)
         return CustomList(result)
 
@@ -24,9 +28,13 @@ class CustomList(list):
             other = CustomList(other)
         max_len = max(len(self), len(other))
         for i in range(max(len(self), len(other))):
-            result_elem = other[i] + self[i] if \
-                i <= min(len(self), len(other)) - 1 else (
-                other[i] if max_len == len(other) else self[i])
+            if i <= min(len(self), len(other)) - 1:
+                result_elem = self[i] + other[i]
+            else:
+                if max_len == len(other):
+                    result_elem = other[i]
+                else:
+                    result_elem = self[i]
             result.append(result_elem)
         return CustomList(result)
 
@@ -39,9 +47,13 @@ class CustomList(list):
             other = CustomList(other)
         max_len = max(len(self), len(other))
         for i in range(max(len(self), len(other))):
-            result_elem = self[i] - other[i] if \
-                i <= min(len(self), len(other)) - 1 else (
-                -other[i] if max_len == len(other) else self[i])
+            if i <= min(len(self), len(other)) - 1:
+                result_elem = self[i] - other[i]
+            else:
+                if max_len == len(other):
+                    result_elem = -other[i]
+                else:
+                    result_elem = self[i]
             result.append(result_elem)
         return result
 
@@ -54,9 +66,13 @@ class CustomList(list):
         max_len = max(len(other), len(self))
         result = CustomList()
         for i in range(max(len(other), len(self))):
-            result_elem = other[i] - self[i] if \
-                i <= min(len(other), len(self)) - 1 else (
-                -self[i] if max_len == len(self) else other[i])
+            if i <= min(len(self), len(other)) - 1:
+                result_elem = other[i] - self[i]
+            else:
+                if max_len == len(self):
+                    result_elem = -self[i]
+                else:
+                    result_elem = other[i]
             result.append(result_elem)
         return result
 

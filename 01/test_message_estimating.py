@@ -151,7 +151,7 @@ class TestEstimating(unittest.TestCase):
     def test_near_corner_threshold_between_good_and_bad(self):
         model = SomeModel()
         with patch("message_estimating.SomeModel.predict") as mock:
-            mock.return_value = 0.3 - 0.1**10
+            mock.return_value = 0.3 - 0.1 ** 10
             self.assertEqual(predict_message_mood("some string", model),
                              "неуд")
             mock.return_value = 0.3 + 0.1 ** 10
