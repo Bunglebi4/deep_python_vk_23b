@@ -35,7 +35,8 @@ class TestEstimating(unittest.TestCase):
         with patch("message_estimating.SomeModel.predict") as mock:
             mock.return_value = 0.3
             self.assertEqual(
-                predict_message_mood("some string", model),
+                predict_message_mood("some string", model, good_thresholds=0.8,
+                                     bad_thresholds=0.3),
                 "норм"
             )
 
@@ -62,7 +63,8 @@ class TestEstimating(unittest.TestCase):
         with patch("message_estimating.SomeModel.predict") as mock:
             mock.return_value = 0.8
             self.assertEqual(
-                predict_message_mood("some string", model),
+                predict_message_mood("some string", model, good_thresholds=0.8,
+                                     bad_thresholds=0.3),
                 "норм"
             )
 
