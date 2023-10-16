@@ -47,5 +47,3 @@ class TestMeanDecorator(unittest.TestCase):
         last_line = output_lines[-2]
         average_time = float(last_line.split()[-2])
         self.assertAlmostEqual(average_time, 0.3, delta=0.05)
-
-
