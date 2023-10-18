@@ -7,7 +7,6 @@ class Price:
 
     def __set__(self, instance, value):
         if not isinstance(value, (int, float)) or value <= 0:
-            print(value)
             raise ValueError("Цена должна быть больше нуля")
         instance.__dict__[self.name] = value
 
