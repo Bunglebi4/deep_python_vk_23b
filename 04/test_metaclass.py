@@ -43,6 +43,19 @@ class TestCustomMeta(unittest.TestCase):
         self.assertTrue("custom_dynamic" in inst.__dict__ and
                         "dynamic" not in inst.__dict__)
 
+    def test_custom_custom(self):
+        inst = self.CustomClass()
+        inst.x = 10
+        inst.custom_x = 20
+        self.assertEqual(inst.custom_x, 20)
+
+    def test_duner(self):
+        inst = self.CustomClass()
+        self.assertEqual(str(inst), "Custom_by_metaclass")
+        inst.__str__ = "string"
+        self.assertFalse('custom___str__' in inst.__dict__)
+
+
     def test_set_custom_attribute_in_constructor(self):
         obj = self.CustomClass(val=42)
         self.assertEqual(obj.custom_val, 42)
