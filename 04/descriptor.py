@@ -1,4 +1,4 @@
-class Mark:
+class Price:
     def __init__(self):
         self.name = None
 
@@ -6,16 +6,16 @@ class Mark:
         return instance.__dict__.get(self.name)
 
     def __set__(self, instance, value):
-        if not isinstance(value, int) or value <= 0 or value >= 6:
+        if not isinstance(value, (int, float)) or value <= 0:
             print(value)
-            raise ValueError("Оценка должна быть целым числом в диапазоне от 1 до 5")
+            raise ValueError("Цена должна быть больше нуля")
         instance.__dict__[self.name] = value
 
     def __set_name__(self, owner, name):
         self.name = name
 
 
-class Name:
+class BookName:
     def __init__(self):
         self.name = None
 
@@ -31,30 +31,26 @@ class Name:
         self.name = name
 
 
-class CurriculumDescriptor:
-    def __init__(self, *valid_courses):
-        self.name = None
-        self.valid_courses = valid_courses
-
+class Genres:
+    valid_genres = ["Programming", "Non-Fiction", "Science Fiction", "Chess"]
     def __get__(self, instance, owner):
-        return instance.__dict__.get(self.name)
+        return instance.__dict__[self.name]
 
     def __set__(self, instance, value):
-        if not all(course in self.valid_courses for course in value):
-            invalid_courses = [course for course in value if course not in self.valid_courses]
-            raise ValueError(f"Недопустимые курсы: {', '.join(invalid_courses)}")
+        if value not in self.valid_genres:
+            raise ValueError("Invalid book genre")
         instance.__dict__[self.name] = value
 
     def __set_name__(self, owner, name):
         self.name = name
 
 
-class Student:
-    marks = Mark()
-    name = Name()
-    curriculum = CurriculumDescriptor("Математика", "История", "Физика")
+class NewBook:
+    price = Price()
+    name = BookName()
+    genres = Genres()
 
-    def __init__(self, name, marks, curriculum):
-        self.marks = marks
+    def __init__(self, name, price, genres):
+        self.price = price
         self.name = name
-        self.curriculum = curriculum
+        self.genres = genres
