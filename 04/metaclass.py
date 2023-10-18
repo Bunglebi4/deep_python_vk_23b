@@ -1,5 +1,5 @@
 class CustomMeta(type):
-    def __new__(cls, name, bases, dct):
+    def __new__(mcs, name, bases, dct):
         custom_dct = {}
         for attr_name, attr_value in dct.items():
             if not (attr_name.startswith('__') and attr_name.endswith('__')):
@@ -7,8 +7,8 @@ class CustomMeta(type):
             else:
                 custom_attr_name = attr_name
             custom_dct[custom_attr_name] = attr_value
-        custom_dct["__setattr__"] = cls.__setattr__
-        return super().__new__(cls, name, bases, custom_dct)
+        custom_dct["__setattr__"] = mcs.__setattr__
+        return super().__new__(mcs, name, bases, custom_dct)
 
-    def __setattr__(self, name, value):
-        self.__dict__[f"custom_{name}"] = value
+    def __setattr__(cls, name, value):
+        cls.__dict__[f"custom_{name}"] = value

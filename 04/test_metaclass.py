@@ -100,6 +100,6 @@ class TestCustomMeta(unittest.TestCase):
 
     def test_protected_attr(self):
         class Buba(metaclass=CustomMeta):
-            def __init__(self, x):
-                self.__x = x
-        self.assertTrue(hasattr(Buba(12), "custom__Buba__x"))
+            def __init__(self, x_obj):
+                self.__x_obj = x_obj
+        self.assertTrue(hasattr(Buba(12), "custom__Buba__x_obj"))
