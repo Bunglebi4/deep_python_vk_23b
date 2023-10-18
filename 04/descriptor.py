@@ -1,4 +1,7 @@
 class Mark:
+    def __init__(self):
+        self.name = None
+
     def __get__(self, instance, owner):
         return instance.__dict__.get(self.name)
 
@@ -13,6 +16,9 @@ class Mark:
 
 
 class Name:
+    def __init__(self):
+        self.name = None
+
     def __get__(self, instance, owner):
         return instance.__dict__.get(self.name)
 
@@ -27,6 +33,7 @@ class Name:
 
 class CurriculumDescriptor:
     def __init__(self, *valid_courses):
+        self.name = None
         self.valid_courses = valid_courses
 
     def __get__(self, instance, owner):
