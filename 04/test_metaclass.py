@@ -59,7 +59,8 @@ class TestCustomMeta(unittest.TestCase):
         obj.attribute = 'test'
         original_value = obj.custom_attribute
         obj.custom_attribute = 'new_test'
-        self.assertEqual(original_value, obj.custom_attribute)
+        self.assertNotEquals(original_value, obj.custom_attribute)
+        self.assertEqual('new_test', obj.custom_attribute)
 
     def test_private_attrs(self):
         class Biba(metaclass=CustomMeta):

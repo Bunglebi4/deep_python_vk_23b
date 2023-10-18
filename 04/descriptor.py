@@ -32,7 +32,9 @@ class BookName:
 
 
 class Genres:
-    valid_genres = ["Programming", "Non-Fiction", "Science Fiction", "Chess"]
+    valid_genres = ["Programming", "Non-Fiction",
+                    "Science Fiction", "Chess"]
+
     def __get__(self, instance, owner):
         return instance.__dict__[self.name]
 

@@ -11,4 +11,7 @@ class CustomMeta(type):
         return super().__new__(mcs, name, bases, custom_dct)
 
     def __setattr__(cls, name, value):
-        cls.__dict__[f"custom_{name}"] = value
+        if not (name.startswith("custom") or (name.startswith("__") and name.endswith("__"))):
+            cls.__dict__[f"custom_{name}"] = value
+        else:
+            cls.__dict__[name] = value
