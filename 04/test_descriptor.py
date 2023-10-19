@@ -25,9 +25,48 @@ class TestNewBookDescriptor(unittest.TestCase):
             new_book = NewBook("C", 5, "boba")
             return new_book
 
+    def test_invalid_change_price(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.price = -5
+            return new_book
+
+    def test_invalid_change_name(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.name = "-5" * 200
+            return new_book
+
+    def test_invalid_change_genres(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.genres = "cringe"
+            return new_book
+
+    def test_value_genre_save_after_error(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.genres = "cringe"
+            return new_book
+        self.assertEqual(new_book.genres, "Chess")
+
+    def test_value_name_save_after_error(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.name = "cringe"*100
+            return new_book
+        self.assertEqual(new_book.name, "C")
+
+    def test_value_price_save_after_error(self):
+        new_book = NewBook("C", 5, "Chess")
+        with self.assertRaises(ValueError):
+            new_book.price = -100
+            return new_book
+        self.assertEqual(new_book.price, 5)
+
     def test_invalid_marks_negative(self):
         with self.assertRaises(ValueError):
-            new_book = NewBook("Haskell", -3,"Chess")
+            new_book = NewBook("Haskell", -3, "Chess")
             return new_book
 
     def test_valid_genre_empty(self):
