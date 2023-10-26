@@ -7,10 +7,9 @@ class LRUCache:
     def get(self, key):
         if key not in self.cache:
             return self.cache.get(key)
-        else:
-            self.order.remove(key)
-            self.order.append(key)
-            return self.cache[key]
+        self.order.remove(key)
+        self.order.append(key)
+        return self.cache[key]
 
     def set(self, key, value) -> None:
         if key in self.cache:
