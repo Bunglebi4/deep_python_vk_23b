@@ -36,7 +36,7 @@ class TestLruCache(unittest.TestCase):
         def factorial_with_cache(num, cache):
             if cache.get(num) is not None:
                 return cache.get(num)
-            if num == 0 or num == 1:
+            if num in {0, 1}:
                 result = 1
             else:
                 result = num * factorial_with_cache(num - 1, cache)
