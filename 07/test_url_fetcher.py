@@ -2,7 +2,8 @@ import aiohttp
 import asyncio
 import unittest
 from unittest.mock import patch
-from acync_url_parser import fetch_url, main
+from acync_url_fetcher import fetch_url, main
+
 
 class TestFetcher(unittest.TestCase):
     @classmethod
@@ -18,8 +19,8 @@ class TestFetcher(unittest.TestCase):
 
     async def asyncSetUp(self):
         self.mock_session = self.get_mock_client_session()
-        self.mock_session.__aenter__.return_value.get.return_value.__aenter__.\
-            return_value.text.return_value\
+        self.mock_session.__aenter__.return_value.get.return_value.__aenter__. \
+            return_value.text.return_value \
             = 'Test Response'
 
     def get_mock_client_session(self):
@@ -42,6 +43,7 @@ class TestFetcher(unittest.TestCase):
             await main(2, url_file)
 
         self.assertEqual(self.mock_session.get.call_count, 2)
+
 
 if __name__ == '__main__':
     unittest.main()
