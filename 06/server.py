@@ -13,7 +13,7 @@ def handle_client(client_socket):
 
     response = crawl_url(url)
 
-    client_socket.send(json.dumps(response).encode('utf-8'))
+    client_socket.send(response.encode('utf-8'))
     client_socket.close()
 
 
@@ -21,13 +21,13 @@ def crawl_url(url):
     with urlopen(url) as page_info:
         page = page_info.read().decode('utf-8')
 
-    soup = bs4.BeautifulSoup(page, "html.parser")
+    soup = bs4.BeautifulSoup(page, 'html.parser')
     text = soup.get_text()
     words = text.split()
     word_count = Counter(words)
     top_k_words = dict(sorted(word_count.items(), key=lambda x: x[1], reverse=True)[:K])
-    print(top_k_words)
-    return top_k_words
+    return json.dumps(top_k_words)
+
 
 
 def worker():
@@ -41,22 +41,22 @@ def worker():
 
 
 def main():
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('localhost', 8888))
-    server.listen(5)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
+        server.bind(('localhost', 7))
+        server.listen(5)
 
-    print("Сервер готов к приему запросов.")
+        print("Сервер готов к приему запросов.")
 
-    for _ in range(workers):
-        trhead = threading.Thread(target=worker)
-        trhead.start()
+        for _ in range(workers):
+            trhead = threading.Thread(target=worker)
+            trhead.start()
 
-    while True:
-        client_socket, addr = server.accept()
-        print(f"Принято соединение от {addr}")
-        data = client_socket.recv(1024)
-        url = data.decode('utf-8')
-        url_queue.put(url)
+        while True:
+            client_socket, addr = server.accept()
+            print(f"Принято соединение от {addr}")
+            data = client_socket.recv(1024)
+            url = data.decode('utf-8')
+            url_queue.put(url)
 
 
 if __name__ == "__main__":
