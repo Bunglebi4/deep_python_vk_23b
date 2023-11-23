@@ -1,0 +1,12 @@
+[INFO] [2023-11-23 17:15:24,605] [log:68] - Logging setup completed
+[DEBUG] [2023-11-23 17:15:24,605] [log:28] - Setting key '1' with value 'one' in cache.
+[DEBUG] [2023-11-23 17:15:24,605] [log:16] - Key '1' found in cache. Value: one
+[DEBUG] [2023-11-23 17:15:24,605] [log:12] - Key '2' not found in cache
+[DEBUG] [2023-11-23 17:15:24,605] [log:28] - Setting key '3' with value 'three' in cache.
+[DEBUG] [2023-11-23 17:15:24,605] [log:28] - Setting key '4' with value 'four' in cache.
+[DEBUG] [2023-11-23 17:15:24,605] [log:87] - Debug message
+[DEBUG] [2023-11-23 17:15:24,605] [log:16] - Key '1' found in cache. Value: one
+[DEBUG] [2023-11-23 17:15:24,605] [log:16] - Key '3' found in cache. Value: three
+[DEBUG] [2023-11-23 17:15:24,605] [log:26] - Evicting key '4' to make space.
+[DEBUG] [2023-11-23 17:15:24,605] [log:28] - Setting key '5' with value 'five' in cache.
+[DEBUG] [2023-11-23 17:15:24,605] [log:94] - Additional debug message
