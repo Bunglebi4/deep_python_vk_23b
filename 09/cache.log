@@ -1,12 +1,17 @@
-[INFO] [2023-11-23 17:19:19,540] [log:68] - Logging setup completed
-[DEBUG] [2023-11-23 17:19:19,540] [log:28] - Setting key '1' with value 'one' in cache.
-[DEBUG] [2023-11-23 17:19:19,540] [log:16] - Key '1' found in cache. Value: one
-[DEBUG] [2023-11-23 17:19:19,540] [log:12] - Key '2' not found in cache
-[DEBUG] [2023-11-23 17:19:19,540] [log:28] - Setting key '3' with value 'three' in cache.
-[DEBUG] [2023-11-23 17:19:19,540] [log:28] - Setting key '4' with value 'four' in cache.
-[DEBUG] [2023-11-23 17:19:19,540] [log:87] - Debug message
-[DEBUG] [2023-11-23 17:19:19,540] [log:16] - Key '1' found in cache. Value: one
-[DEBUG] [2023-11-23 17:19:19,540] [log:16] - Key '3' found in cache. Value: three
-[DEBUG] [2023-11-23 17:19:19,540] [log:26] - Evicting key '4' to make space.
-[DEBUG] [2023-11-23 17:19:19,540] [log:28] - Setting key '5' with value 'five' in cache.
-[DEBUG] [2023-11-23 17:19:19,540] [log:94] - Additional debug message
+[ERROR] [2023-11-23 17:40:35,313] [log:68] - exception occurred
+Traceback (most recent call last):
+  File "C:\Users\Bugnlebi4\deep_python\deep_python_vk_23b\09\log.py", line 66, in setup_logging
+    raise Exception("ашыбка")
+Exception: ашыбка
+[INFO] [2023-11-23 17:40:35,313] [log:70] - Logging setup completed
+[DEBUG] [2023-11-23 17:40:35,314] [log:31] - Setting key '1' with value 'one' in cache.
+[DEBUG] [2023-11-23 17:40:35,314] [log:19] - Key '1' found in cache. Value: one
+[DEBUG] [2023-11-23 17:40:35,314] [log:15] - Key '2' not found in cache
+[DEBUG] [2023-11-23 17:40:35,314] [log:31] - Setting key '3' with value 'three' in cache.
+[DEBUG] [2023-11-23 17:40:35,314] [log:31] - Setting key '4' with value 'four' in cache.
+[DEBUG] [2023-11-23 17:40:35,314] [log:84] - Debug message
+[DEBUG] [2023-11-23 17:40:35,314] [log:19] - Key '1' found in cache. Value: one
+[DEBUG] [2023-11-23 17:40:35,314] [log:19] - Key '3' found in cache. Value: three
+[DEBUG] [2023-11-23 17:40:35,314] [log:29] - Evicting key '4' to make space.
+[DEBUG] [2023-11-23 17:40:35,314] [log:31] - Setting key '5' with value 'five' in cache.
+[DEBUG] [2023-11-23 17:40:35,314] [log:88] - Additional debug message

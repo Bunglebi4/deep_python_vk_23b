@@ -1,5 +1,7 @@
 import argparse
 import logging
+import sys
+
 
 
 class LRUCache:
@@ -58,8 +60,14 @@ def setup_logging(log_to_stdout, custom_filter):
                 return len(record.msg.split()) % 2 != 0
 
         logger.addFilter(CustomFilter())
-    logger.info("Logging setup completed")
+    condition = True
+    try:
+        if condition:
+            raise Exception("ашыбка")
+    except Exception:
+        logger.exception('exception occurred')
 
+    logger.info("Logging setup completed")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='LRUCache logging example')
