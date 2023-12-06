@@ -1,22 +1,26 @@
 class LRUCache:
-    def __init__(self, capacity):
-        self.capacity = capacity
+    def __init__(self, limit=100):
         self.cache = {}
-        self.order = []
+        self.len = 0
+        self.limit = limit
 
     def get(self, key):
-        if key not in self.cache:
-            return self.cache.get(key)
-        self.order.remove(key)
-        self.order.append(key)
-        return self.cache[key]
-
-    def set(self, key, value) -> None:
         if key in self.cache:
-            self.order.remove(key)
-            del self.cache[key]
-        elif len(self.cache) >= self.capacity:
-            evicted_key = self.order.pop(0)
-            del self.cache[evicted_key]
-        self.cache[key] = value
-        self.order.append(key)
+            self.cache[key] = self.cache.pop(key)
+        return self.cache.get(key)
+
+    def set(self, key, value):
+        if self.len < self.limit:
+            if key in self.cache:
+                self.cache.pop(key)
+                self.cache[key] = value
+            else:
+                self.len += 1
+                self.cache[key] = value
+        else:
+            if key in self.cache:
+                self.cache.pop(key)
+                self.cache[key] = value
+            else:
+                self.cache.pop(next(iter(self.cache.keys())))
+                self.cache[key] = value
